@@ -1,26 +1,654 @@
 @import "tailwindcss";
 
+/* =========================================================
+   RICOZINVOICE — GLOBAL DESIGN SYSTEM
+   ========================================================= */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* -------------------------------------------------------
+     BRAND
+     ------------------------------------------------------- */
+
+  --brand-red: #c91d20;
+  --brand-red-hover: #ad181b;
+  --brand-red-active: #961417;
+
+  --brand-red-soft: #f5c7c8;
+  --brand-red-pale: #fff0f0;
+  --brand-red-subtle: #fff7f7;
+
+  --brand-navy: #18243a;
+  --brand-navy-light: #24324b;
+  --brand-navy-dark: #101a2c;
+
+  /* -------------------------------------------------------
+     TEXT
+     ------------------------------------------------------- */
+
+  --brand-text: #18243a;
+  --brand-text-secondary: #4f596b;
+  --brand-gray: #667085;
+  --brand-text-muted: #8a93a3;
+  --brand-text-disabled: #b0b7c3;
+
+  /* -------------------------------------------------------
+     BACKGROUNDS
+     ------------------------------------------------------- */
+
+  --brand-background: #ffffff;
+  --brand-surface: #f7f8fa;
+  --brand-surface-hover: #f1f3f6;
+  --brand-surface-active: #e9ecf1;
+
+  --brand-surface-dark: #18243a;
+
+  /* -------------------------------------------------------
+     BORDERS
+     ------------------------------------------------------- */
+
+  --brand-border: #e4e7ec;
+  --brand-border-strong: #d0d5dd;
+  --brand-border-dark: #344054;
+
+  /* -------------------------------------------------------
+     STATUS
+     ------------------------------------------------------- */
+
+  --status-success: #16803c;
+  --status-success-bg: #ecfdf3;
+  --status-success-border: #abefc6;
+
+  --status-warning: #b54708;
+  --status-warning-bg: #fffaeb;
+  --status-warning-border: #fedf89;
+
+  --status-danger: #d92d20;
+  --status-danger-bg: #fef3f2;
+  --status-danger-border: #fecdca;
+
+  --status-info: #175cd3;
+  --status-info-bg: #eff8ff;
+  --status-info-border: #b2ddff;
+
+  /* -------------------------------------------------------
+     INVOICE / FINANCE
+     ------------------------------------------------------- */
+
+  --finance-paid: #16803c;
+  --finance-pending: #b54708;
+  --finance-overdue: #d92d20;
+  --finance-draft: #667085;
+
+  /* -------------------------------------------------------
+     SHADOWS
+     ------------------------------------------------------- */
+
+  --shadow-xs:
+    0 1px 2px rgba(16, 24, 40, 0.05);
+
+  --shadow-sm:
+    0 1px 3px rgba(16, 24, 40, 0.08),
+    0 1px 2px rgba(16, 24, 40, 0.04);
+
+  --shadow-md:
+    0 4px 12px rgba(16, 24, 40, 0.08);
+
+  --shadow-lg:
+    0 12px 35px rgba(24, 36, 58, 0.08);
+
+  --shadow-xl:
+    0 20px 50px rgba(24, 36, 58, 0.12);
+
+  --shadow-brand:
+    0 8px 24px rgba(201, 29, 32, 0.18);
+
+  /* -------------------------------------------------------
+     RADIUS
+     ------------------------------------------------------- */
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
+  --radius-full: 9999px;
+
+  /* -------------------------------------------------------
+     SPACING
+     ------------------------------------------------------- */
+
+  --page-padding-mobile: 20px;
+  --page-padding-desktop: 32px;
+
+  --content-max-width: 1200px;
+
+  /* -------------------------------------------------------
+     SIDEBAR
+     ------------------------------------------------------- */
+
+  --sidebar-width: 256px;
+  --sidebar-width-collapsed: 72px;
+
+  --sidebar-background: var(--brand-navy);
+  --sidebar-text: #c7ced9;
+  --sidebar-text-active: #ffffff;
+
+  --sidebar-item-hover: rgba(255, 255, 255, 0.06);
+  --sidebar-item-active: var(--brand-red);
+
+  /* -------------------------------------------------------
+     HEADER
+     ------------------------------------------------------- */
+
+  --header-height: 64px;
+  --header-background: #ffffff;
+  --header-border: var(--brand-border);
+
+  /* -------------------------------------------------------
+     INPUTS
+     ------------------------------------------------------- */
+
+  --input-height: 40px;
+  --input-background: #ffffff;
+  --input-border: var(--brand-border-strong);
+  --input-border-focus: var(--brand-red);
+
+  /* -------------------------------------------------------
+     BUTTONS
+     ------------------------------------------------------- */
+
+  --button-height-sm: 36px;
+  --button-height-md: 40px;
+  --button-height-lg: 44px;
+
+  /* -------------------------------------------------------
+     TRANSITIONS
+     ------------------------------------------------------- */
+
+  --transition-fast: 150ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow: 300ms ease;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+/* =========================================================
+   DARK THEME
+   ========================================================= */
+
+.dark {
+  --brand-background: #0f1728;
+
+  --brand-surface: #151f32;
+  --brand-surface-hover: #1d293d;
+  --brand-surface-active: #253149;
+
+  --brand-text: #f8fafc;
+  --brand-text-secondary: #c7ced9;
+  --brand-gray: #98a2b3;
+  --brand-text-muted: #667085;
+  --brand-text-disabled: #475467;
+
+  --brand-border: #293548;
+  --brand-border-strong: #344054;
+
+  --header-background: #111a2b;
+
+  --input-background: #151f32;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+
+  background: var(--brand-background);
+  color: var(--brand-text);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   HEADINGS
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+
+  font-family:
+    Manrope,
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+
+  color: var(--brand-text);
+}
+
+h1 {
+  letter-spacing: -0.035em;
+}
+
+h2 {
+  letter-spacing: -0.025em;
+}
+
+h3 {
+  letter-spacing: -0.015em;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--brand-text-muted);
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--brand-red-soft);
+  color: var(--brand-navy);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-border-strong) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-border-strong);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-gray);
+}
+
+
+/* =========================================================
+   REUSABLE CONTAINER
+   ========================================================= */
+
+.container-ricoz {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin-inline: auto;
+  padding-inline: var(--page-padding-mobile);
+}
+
+@media (min-width: 1024px) {
+  .container-ricoz {
+    padding-inline: var(--page-padding-desktop);
+  }
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.ricoz-card {
+  background: var(--brand-background);
+  border: 1px solid var(--brand-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.ricoz-card-hover {
+  transition:
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.ricoz-card-hover:hover {
+  border-color: var(--brand-border-strong);
+  box-shadow: var(--shadow-md);
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.ricoz-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: var(--button-height-md);
+  padding-inline: 16px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+
+  background: var(--brand-red);
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    box-shadow var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.ricoz-button-primary:hover {
+  background: var(--brand-red-hover);
+  box-shadow: var(--shadow-brand);
+}
+
+.ricoz-button-primary:active {
+  background: var(--brand-red-active);
+  transform: translateY(1px);
+}
+
+
+/* =========================================================
+   SECONDARY BUTTON
+   ========================================================= */
+
+.ricoz-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: var(--button-height-md);
+  padding-inline: 16px;
+
+  border: 1px solid var(--brand-border-strong);
+  border-radius: var(--radius-md);
+
+  background: var(--brand-background);
+  color: var(--brand-text);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.ricoz-button-secondary:hover {
+  background: var(--brand-surface);
+  border-color: var(--brand-gray);
+}
+
+
+/* =========================================================
+   INPUT
+   ========================================================= */
+
+.ricoz-input {
+  width: 100%;
+  height: var(--input-height);
+
+  padding-inline: 12px;
+
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius-md);
+
+  background: var(--input-background);
+  color: var(--brand-text);
+
+  outline: none;
+
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+.ricoz-input:focus {
+  border-color: var(--input-border-focus);
+  box-shadow: 0 0 0 3px var(--brand-red-pale);
+}
+
+
+/* =========================================================
+   STATUS BADGES
+   ========================================================= */
+
+.ricoz-status-success {
+  color: var(--status-success);
+  background: var(--status-success-bg);
+  border-color: var(--status-success-border);
+}
+
+.ricoz-status-warning {
+  color: var(--status-warning);
+  background: var(--status-warning-bg);
+  border-color: var(--status-warning-border);
+}
+
+.ricoz-status-danger {
+  color: var(--status-danger);
+  background: var(--status-danger-bg);
+  border-color: var(--status-danger-border);
+}
+
+.ricoz-status-info {
+  color: var(--status-info);
+  background: var(--status-info-bg);
+  border-color: var(--status-info-border);
+}
+
+
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.ricoz-sidebar {
+  width: var(--sidebar-width);
+
+  background: var(--sidebar-background);
+  color: var(--sidebar-text);
+
+  transition:
+    width var(--transition-slow),
+    transform var(--transition-slow);
+}
+
+.ricoz-sidebar[data-state="collapsed"] {
+  width: var(--sidebar-width-collapsed);
+}
+
+
+/* =========================================================
+   SIDEBAR ITEM
+   ========================================================= */
+
+.ricoz-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 40px;
+  padding-inline: 12px;
+
+  border-radius: var(--radius-md);
+
+  color: var(--sidebar-text);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.ricoz-sidebar-item:hover {
+  background: var(--sidebar-item-hover);
+  color: var(--sidebar-text-active);
+}
+
+.ricoz-sidebar-item[data-active="true"] {
+  background: var(--sidebar-item-active);
+  color: var(--sidebar-text-active);
+}
+
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+
+.ricoz-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ricoz-table th {
+  padding: 12px 16px;
+
+  background: var(--brand-surface);
+
+  color: var(--brand-gray);
+
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.ricoz-table td {
+  padding: 14px 16px;
+
+  border-top: 1px solid var(--brand-border);
+
+  font-size: 14px;
+}
+
+.ricoz-table tbody tr {
+  transition: background var(--transition-fast);
+}
+
+.ricoz-table tbody tr:hover {
+  background: var(--brand-surface);
+}
+
+
+/* =========================================================
+   DIVIDER
+   ========================================================= */
+
+.ricoz-divider {
+  height: 1px;
+  width: 100%;
+  background: var(--brand-border);
+}
+
+
+/* =========================================================
+   FOCUS ACCESSIBILITY
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--brand-red);
+  outline-offset: 2px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }
